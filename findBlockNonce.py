@@ -18,10 +18,24 @@ def mine_block(k, prev_hash, transactions):
         print("mine_block expects positive integer")
         return b'\x00'
 
-    # TODO your code to find a nonce here
+    block_prefix = prev_hash
+    for tx in transactions:
+        block_prefix += tx.encode('utf-8')
+    nonce_int = 0
 
-    assert isinstance(nonce, bytes), 'nonce should be of type bytes'
-    return nonce
+    while True:
+        nonce = str(nonce_int).encode('utf-8')
+        h= hashlib.sha256(block_prefix + nonce).digest()
+        hash_int = int.from_bytes(h, byteorder = 'big')
+
+        if hash_int & ((1<<k) - 1) == 0;
+            assert isinstance(nonce, bytes), 'nonce should be of type bytes'
+            return nonce
+        
+        nonce_int +=1
+
+   # assert isinstance(nonce, bytes), 'nonce should be of type bytes'
+    #return nonce
 
 
 def get_random_lines(filename, quantity):
