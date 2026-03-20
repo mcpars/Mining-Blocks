@@ -28,7 +28,7 @@ def mine_block(k, prev_hash, transactions):
         h= hashlib.sha256(block_prefix + nonce).digest()
         hash_int = int.from_bytes(h, byteorder = 'big')
 
-        if hash_int & ((1<<k) - 1) == 0;
+        if hash_int & ((1<<k) - 1) == 0:
             assert isinstance(nonce, bytes), 'nonce should be of type bytes'
             return nonce
         
